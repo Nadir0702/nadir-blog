@@ -10,14 +10,16 @@ from flask_login import UserMixin, login_user, LoginManager, current_user, logou
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 import smtplib
+import os
 
-MY_PASSWORD = "ywxiedysuzxccbtt"
-MY_EMAIL = "nadirelmakias@yahoo.com"
-TARGET_EMAIL = "nadir070299e@gmail.com"
+secret_key = os.environ.get("SECRET_KEY")
+my_password = os.environ.get("MY_PASSWORD")
+my_email = os.environ.get("MY_EMAIL")
+target_email = os.environ.get("TARGET_EMAIL")
 COPYRIGHT = date.today().strftime("%Y")
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = secret_key
 ckeditor = CKEditor(app)
 Bootstrap(app)
 gravatar = Gravatar(app,
@@ -181,9 +183,9 @@ def contact():
         message = request.form['message']
         with smtplib.SMTP("smtp.mail.yahoo.com") as connection:
             connection.starttls()
-            connection.login(user=MY_EMAIL, password=MY_PASSWORD)
-            connection.sendmail(from_addr=MY_EMAIL,
-                                to_addrs=TARGET_EMAIL,
+            connection.login(user=my_email, password=my_password)
+            connection.sendmail(from_addr=my_email,
+                                to_addrs=target_email,
                                 msg=f"Subject:New fan message from my blog!\n\n"
                                     f"{name}\n\n{email}\n\n{phone}\n\n{message}")
         return render_template("contact.html", message_sent=True)
@@ -245,6 +247,3 @@ def delete_post(post_id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
-
-
-
