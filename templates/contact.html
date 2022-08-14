@@ -29,13 +29,13 @@
                             <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="{{ url_for('contact') }}" method="post">
                                 <div class="form-floating">
                                     <label for="name">Name:</label>
-                                    <input name="name" class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                    <input value="{% if logged_in %}{{ current_user.name }}{% endif %}" name="name" class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                 </div>
                                 <br />
                                 <div class="form-floating">
                                     <label for="email">Email address:</label>
-                                    <input name="email" class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
+                                    <input value="{% if logged_in %}{{ current_user.email }}{% endif %}" name="email" class="form-control" id="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
                                     <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                     <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                                 </div>

@@ -21,7 +21,7 @@ my_email = os.getenv("MY_EMAIL")
 target_email = os.getenv("TARGET_EMAIL")
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config['SECRET_KEY'] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
 ckeditor = CKEditor(app)
 Bootstrap(app)
 gravatar = Gravatar(app,
@@ -193,8 +193,8 @@ def contact():
                                 to_addrs=target_email,
                                 msg=f"Subject:New fan message from my blog!\n\n"
                                     f"{name}\n\n{email}\n\n{phone}\n\n{message}")
-        return render_template("contact.html", message_sent=True)
-    return render_template("contact.html", message_sent=False)
+        return render_template("contact.html", message_sent=True, logged_in=current_user.is_authenticated)
+    return render_template("contact.html", message_sent=False, logged_in=current_user.is_authenticated)
 
 
 @app.route("/new-post", methods=["GET", "POST"])
