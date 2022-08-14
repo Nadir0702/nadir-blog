@@ -11,12 +11,15 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 import smtplib
 import os
+from dotenv import load_dotenv
 
-secret_key = os.environ.get("SECRET_KEY")
-my_password = os.environ.get("MY_PASSWORD")
-my_email = os.environ.get("MY_EMAIL")
-target_email = os.environ.get("TARGET_EMAIL")
 COPYRIGHT = date.today().strftime("%Y")
+
+load_dotenv()
+my_password = os.getenv("MY_PASSWORD")
+my_email = os.environ["MY_EMAIL"]
+target_email = os.environ.get("TARGET_EMAIL")
+secret_key = os.environ.get("SECRET_KEY")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
