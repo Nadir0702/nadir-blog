@@ -17,9 +17,9 @@ COPYRIGHT = date.today().strftime("%Y")
 
 load_dotenv()
 my_password = os.getenv("MY_PASSWORD")
-my_email = os.environ["MY_EMAIL"]
-target_email = os.environ.get("TARGET_EMAIL")
-secret_key = os.environ.get("SECRET_KEY")
+my_email = os.getenv("MY_EMAIL")
+target_email = os.getenv("TARGET_EMAIL")
+secret_key = os.getenv("SECRET_KEY")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
